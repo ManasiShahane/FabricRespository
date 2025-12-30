@@ -10,6 +10,8 @@ annotation PBI_QueryOrder = ["Order1"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
+annotation PBI_ProTooling = ["DevMode"]
+
 ref table Order1
 ref table DateTableTemplate_470da300-6209-4d2c-917f-ce4eae92570c
 ref table LocalDateTable_06001e68-9a6d-4aad-9022-1f8ab479bece
