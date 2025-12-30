@@ -1,7 +1,0 @@
-role UK
-	modelPermission: read
-
-	tablePermission Order1 = [Ship Country] = "UK"
-
-	annotation PBI_Id = 673e0441565e4bbf98dd9cfd97fd4f36
-

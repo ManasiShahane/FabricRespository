@@ -1,8 +1,0 @@
-{
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
-  "name": "464491670db314049751",
-  "displayName": "Sales Report Three",
-  "displayOption": "FitToPage",
-  "height": 720,
-  "width": 1280
-}
