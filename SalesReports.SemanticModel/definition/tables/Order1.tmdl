@@ -1,0 +1,109 @@
+table Order1
+	lineageTag: f0c834b0-d790-435b-a10d-380132d813c0
+
+	column 'Order ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: b152418f-6839-46a4-b518-5375a997b782
+		summarizeBy: count
+		sourceColumn: Order ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: af03057f-742e-435d-9ba6-cf5cc02ce1d4
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 090a87f0-7939-4428-91c8-0c0bc3a19cf7
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Unit Price'
+		dataType: double
+		lineageTag: cfdfe20c-8f77-45e2-ae39-0b5978be2d3a
+		summarizeBy: sum
+		sourceColumn: Unit Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e7f80a2-9551-4ab2-826b-68c73299eefe
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer
+		dataType: string
+		lineageTag: 4d2be8c4-1c1a-4274-9f87-00b072893f74
+		summarizeBy: none
+		sourceColumn: Customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship City'
+		dataType: string
+		lineageTag: 69da9045-4dfd-4b6b-bb1a-62a03292dd54
+		summarizeBy: none
+		sourceColumn: Ship City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ship Country'
+		dataType: string
+		lineageTag: 4ed13c0d-1e5a-4cfd-a04b-354beae4f162
+		summarizeBy: none
+		sourceColumn: Ship Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Order Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3f4a7262-b381-4962-91ec-b07049e1c16d
+		summarizeBy: none
+		sourceColumn: Order Date
+
+		variation Variation
+			isDefault
+			relationship: 4fdd83b2-2db3-4676-ae1f-767c2725004d
+			defaultHierarchy: LocalDateTable_06001e68-9a6d-4aad-9022-1f8ab479bece.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Total
+		dataType: double
+		lineageTag: d12df1b0-e265-4795-827f-383e111ade82
+		summarizeBy: sum
+		sourceColumn: Total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Order1 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("D:\PL-300\Training Files for Power BI\Training Files for Power BI\Order Sample.xlsx"), null, true),
+				    Order_Table = Source{[Item="Order",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Order_Table,{{"Order ID", Int64.Type}, {"Product", type text}, {"Category", type text}, {"Unit Price", type number}, {"Quantity", Int64.Type}, {"Customer", type text}, {"Ship City", type text}, {"Ship Country", type text}, {"Order Date", type date}, {"Total", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

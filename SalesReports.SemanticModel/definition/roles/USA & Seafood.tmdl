@@ -1,0 +1,7 @@
+role 'USA & Seafood'
+	modelPermission: read
+
+	tablePermission Order1 = [Ship Country] = "USA" && [Category] = "Seafood"
+
+	annotation PBI_Id = 098704f109974175b847307914dcde9a
+
